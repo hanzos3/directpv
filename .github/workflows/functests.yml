@@ -53,7 +53,7 @@ jobs:
 
       - name: Build docker image
         run: |
-          docker build --quiet -t quay.io/minio/directpv:${VERSION} .
+          docker build --quiet -t ghcr.io/hanzos3/directpv:${VERSION} .
           docker build --quiet -t example.org/test/sleep:v0.0.1 -f functests/Dockerfile.sleep functests
 
       - name: Setup Minikube

@@ -35,7 +35,7 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: spec.nodeName
-        image: quay.io/minio/csi-node-driver-registrar@sha256:c571b1462c6798725c0da58aab4896f910b38dc4ef48352ead3e4625d2d63a06
+        image: ghcr.io/hanzos3/csi-node-driver-registrar@sha256:c571b1462c6798725c0da58aab4896f910b38dc4ef48352ead3e4625d2d63a06
         name: node-driver-registrar
         resources: {}
         terminationMessagePath: /var/log/driver-registrar-termination-log
@@ -61,7 +61,7 @@ spec:
               fieldPath: spec.nodeName
         - name: CSI_ENDPOINT
           value: unix:///csi/csi.sock
-        image: quay.io/minio/directpv@sha256:352806476d3962a6fc4b8a615c95ce2391ca8b0ece00c99b402fd140555b69b5
+        image: ghcr.io/hanzos3/directpv@sha256:352806476d3962a6fc4b8a615c95ce2391ca8b0ece00c99b402fd140555b69b5
         livenessProbe:
           failureThreshold: 5
           httpGet:
@@ -125,7 +125,7 @@ spec:
       - args:
         - --csi-address=/csi/csi.sock
         - --health-port=9898
-        image: quay.io/minio/livenessprobe@sha256:8f3b1bec9c87a832a3fe6e8b7f165e0ff048aef7373f9764f40efee456a00321
+        image: ghcr.io/hanzos3/livenessprobe@sha256:8f3b1bec9c87a832a3fe6e8b7f165e0ff048aef7373f9764f40efee456a00321
         name: liveness-probe
         resources: {}
         terminationMessagePath: /var/log/driver-liveness-termination-log

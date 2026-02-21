@@ -1,7 +1,7 @@
 //go:build !linux
 
-// This file is part of MinIO DirectPV
-// Copyright (c) 2024 MinIO, Inc.
+// This file is part of Hanzo S3 DirectPV
+// Copyright (c) 2024 Hanzo AI, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by

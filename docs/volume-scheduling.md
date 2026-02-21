@@ -99,13 +99,13 @@ EOF
 
 ### Unique drive selection
 
-The default free capacity based drive selection leads to allocate more than one volume in a single drive for StatefulSet deployments which lacks performance and high availability for application like MinIO object storage. To overcome this behavior, DirectPV provides a way to allocate one volume per drive. This feature needs to be set by having custom storage class with label 'directpv.min.io/volume-claim-id'. Below is an example to create custom storage class using [create-storage-class.sh script](../tools/create-storage-class.sh):
+The default free capacity based drive selection leads to allocate more than one volume in a single drive for StatefulSet deployments which lacks performance and high availability for application like Hanzo S3 object storage. To overcome this behavior, DirectPV provides a way to allocate one volume per drive. This feature needs to be set by having custom storage class with label 'directpv.min.io/volume-claim-id'. Below is an example to create custom storage class using [create-storage-class.sh script](../tools/create-storage-class.sh):
 
 ```sh
 create-storage-class.sh tenant-1-storage 'directpv.min.io/volume-claim-id: 555e99eb-e255-4407-83e3-fc443bf20f86'
 ```
 
-This custom storage class has to be used in your StatefulSet deployment. Below is an example to deploy MinIO object storage
+This custom storage class has to be used in your StatefulSet deployment. Below is an example to deploy Hanzo S3 object storage
 
 ```yaml
 kind: Service

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-# This file is part of MinIO DirectPV
-# Copyright (c) 2022 MinIO, Inc.
+# This file is part of Hanzo S3 DirectPV
+# Copyright (c) 2022 Hanzo AI, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -67,6 +67,6 @@ function migrate_test() {
     remove_lvm
 }
 
-curl --silent --location --insecure --fail --output "${LEGACY_FILE}" "https://github.com/minio/directpv/releases/download/${LEGACY_VERSION}/${LEGACY_FILE}"
+curl --silent --location --insecure --fail --output "${LEGACY_FILE}" "https://github.com/hanzos3/directpv/releases/download/${LEGACY_VERSION}/${LEGACY_FILE}"
 chmod a+x "${LEGACY_FILE}"
 migrate_test "./${LEGACY_FILE}" 4

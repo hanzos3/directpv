@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-# This file is part of MinIO DirectPV
-# Copyright (c) 2023 MinIO, Inc.
+# This file is part of Hanzo S3 DirectPV
+# Copyright (c) 2023 Hanzo AI, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -55,7 +55,7 @@ EOF
 # usage: push_image <image>
 function push_image() {
     image="$1"
-    private_image="${image/quay.io\/minio/$registry}"
+    private_image="${image/ghcr.io\/hanzos3/$registry}"
     echo "Pushing image ${image}"
     "${podman}" pull --quiet "${image}"
     "${podman}" tag "${image}" "${private_image}"
@@ -63,13 +63,13 @@ function push_image() {
 }
 
 function main() {
-    push_image "quay.io/minio/csi-node-driver-registrar:v2.12.0-0"
-    push_image "quay.io/minio/csi-provisioner:v5.0.2-0"
-    push_image "quay.io/minio/csi-provisioner:v2.2.0-go1.18"
-    push_image "quay.io/minio/livenessprobe:v2.14.0-0"
-    push_image "quay.io/minio/csi-resizer:v1.12.0-0"
-    release=$(curl -sfL "https://api.github.com/repos/minio/directpv/releases/latest" | awk '/tag_name/ { print substr($2, 3, length($2)-4) }')
-    push_image "quay.io/minio/directpv:v${release}"
+    push_image "ghcr.io/hanzos3/csi-node-driver-registrar:v2.12.0-0"
+    push_image "ghcr.io/hanzos3/csi-provisioner:v5.0.2-0"
+    push_image "ghcr.io/hanzos3/csi-provisioner:v2.2.0-go1.18"
+    push_image "ghcr.io/hanzos3/livenessprobe:v2.14.0-0"
+    push_image "ghcr.io/hanzos3/csi-resizer:v1.12.0-0"
+    release=$(curl -sfL "https://api.github.com/repos/hanzos3/directpv/releases/latest" | awk '/tag_name/ { print substr($2, 3, length($2)-4) }')
+    push_image "ghcr.io/hanzos3/directpv:v${release}"
 }
 
 init "$@"

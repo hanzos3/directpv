@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# This file is part of MinIO DirectPV
-# Copyright (c) 2024 MinIO, Inc.
+# This file is part of Hanzo S3 DirectPV
+# Copyright (c) 2024 Hanzo AI, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -16,9 +16,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 function generate_dockerfile() {
-    cat >Dockerfile.minio <<EOF
+    cat >Dockerfile.release <<EOF
 FROM registry.access.redhat.com/ubi8/ubi-micro:8.10
-LABEL maintainers="dev@min.io"
+LABEL maintainers="dev@hanzo.ai"
 LABEL description="${PROJECT_DESCRIPTION}"
 COPY ${PROJECT_NAME} /${PROJECT_NAME}
 COPY LICENSE /licenses/LICENSE
@@ -36,7 +36,7 @@ release:
    name_template: "Release version {{.Version}}"
 
    github:
-    owner: minio
+    owner: hanzos3
     name: "{{ .ProjectName }}"
 
    extra_files:
@@ -77,49 +77,49 @@ changelog:
 
 dockers:
 - image_templates:
-  - "quay.io/minio/{{ .ProjectName }}:{{ .Tag }}-amd64"
+  - "ghcr.io/hanzos3/{{ .ProjectName }}:{{ .Tag }}-amd64"
   use: buildx
   goarch: amd64
   ids:
     - "{{ .ProjectName }}"
-  dockerfile: Dockerfile.minio
+  dockerfile: Dockerfile.release
   extra_files:
     - LICENSE
   build_flag_templates:
   - "--platform=linux/amd64"
 - image_templates:
-  - "quay.io/minio/{{ .ProjectName }}:{{ .Tag }}-ppc64le"
+  - "ghcr.io/hanzos3/{{ .ProjectName }}:{{ .Tag }}-ppc64le"
   use: buildx
   goarch: ppc64le
   ids:
     - "{{ .ProjectName }}"
-  dockerfile: Dockerfile.minio
+  dockerfile: Dockerfile.release
   extra_files:
     - LICENSE
   build_flag_templates:
   - "--platform=linux/ppc64le"
 - image_templates:
-  - "quay.io/minio/{{ .ProjectName }}:{{ .Tag }}-arm64"
+  - "ghcr.io/hanzos3/{{ .ProjectName }}:{{ .Tag }}-arm64"
   use: buildx
   goarch: arm64
   ids:
     - "{{ .ProjectName }}"
-  dockerfile: Dockerfile.minio
+  dockerfile: Dockerfile.release
   extra_files:
     - LICENSE
   build_flag_templates:
   - "--platform=linux/arm64"
 docker_manifests:
-- name_template: quay.io/minio/{{ .ProjectName }}:{{ .Tag }}
+- name_template: ghcr.io/hanzos3/{{ .ProjectName }}:{{ .Tag }}
   image_templates:
-  - quay.io/minio/{{ .ProjectName }}:{{ .Tag }}-amd64
-  - quay.io/minio/{{ .ProjectName }}:{{ .Tag }}-arm64
-  - quay.io/minio/{{ .ProjectName }}:{{ .Tag }}-ppc64le
-- name_template: quay.io/minio/{{ .ProjectName }}:latest
+  - ghcr.io/hanzos3/{{ .ProjectName }}:{{ .Tag }}-amd64
+  - ghcr.io/hanzos3/{{ .ProjectName }}:{{ .Tag }}-arm64
+  - ghcr.io/hanzos3/{{ .ProjectName }}:{{ .Tag }}-ppc64le
+- name_template: ghcr.io/hanzos3/{{ .ProjectName }}:latest
   image_templates:
-  - quay.io/minio/{{ .ProjectName }}:{{ .Tag }}-amd64
-  - quay.io/minio/{{ .ProjectName }}:{{ .Tag }}-arm64
-  - quay.io/minio/{{ .ProjectName }}:{{ .Tag }}-ppc64le
+  - ghcr.io/hanzos3/{{ .ProjectName }}:{{ .Tag }}-amd64
+  - ghcr.io/hanzos3/{{ .ProjectName }}:{{ .Tag }}-arm64
+  - ghcr.io/hanzos3/{{ .ProjectName }}:{{ .Tag }}-ppc64le
 EOF
 }
 
@@ -155,9 +155,9 @@ function release() {
         exit 1
     fi
 
-    last_tag=$(curl -sfL "https://quay.io/api/v1/repository/minio/${PROJECT_NAME}" | jq -r ".tags | keys_unsorted[] | select(startswith(\"${tag}-\"))" | sort --reverse --version-sort | head -n1)
+    last_tag=$(curl -sfL "https://ghcr.io/v2/hanzos3/${PROJECT_NAME}/tags/list" | jq -r ".tags[] | select(startswith(\"${tag}-\"))" | sort --reverse --version-sort | head -n1)
     if [ -z "${last_tag}" ]; then
-        prev_tag=$(curl -sfL "https://quay.io/api/v1/repository/minio/${PROJECT_NAME}" | jq -r '.tags | keys_unsorted[]' | sort --reverse --version-sort | head -n1)
+        prev_tag=$(curl -sfL "https://ghcr.io/v2/hanzos3/${PROJECT_NAME}/tags/list" | jq -r '.tags[]' | sort --reverse --version-sort | head -n1)
         if [ "${tag}" == "${prev_tag}" ]; then
             curr_tag="${tag}-1"
         else

@@ -18,19 +18,19 @@ resources:
   - Deployment.yaml
 
 images:
-  - name: quay.io/minio/directpv
+  - name: ghcr.io/hanzos3/directpv
     digest: sha256:352806476d3962a6fc4b8a615c95ce2391ca8b0ece00c99b402fd140555b69b5
 
-  - name: quay.io/minio/csi-node-driver-registrar
+  - name: ghcr.io/hanzos3/csi-node-driver-registrar
     digest: sha256:c571b1462c6798725c0da58aab4896f910b38dc4ef48352ead3e4625d2d63a06
 
-  - name: quay.io/minio/livenessprobe
+  - name: ghcr.io/hanzos3/livenessprobe
     digest: sha256:8f3b1bec9c87a832a3fe6e8b7f165e0ff048aef7373f9764f40efee456a00321
 
-  - name: quay.io/minio/csi-provisioner
+  - name: ghcr.io/hanzos3/csi-provisioner
     digest: sha256:fff8927753ef1a67278804897de5dda9fd47c48b27575d53daafb12ab7179446
 
-  - name: quay.io/minio/csi-resizer
+  - name: ghcr.io/hanzos3/csi-resizer
     digest: sha256:0640655cdf10b17bf50b304d5c3555135141b6bd3d79260a3ce389bf90d4e4bf
 
 patches:

@@ -20,12 +20,12 @@ $ kubectl krew install directpv
 ```
 
 ### Installation of release binary
-The plugin binary name starts by `kubectl-directpv` and is available at https://github.com/minio/directpv/releases/latest. Download the binary as per your operating system and architecture. Below is an example for `GNU/Linux` on `amd64` architecture:
+The plugin binary name starts by `kubectl-directpv` and is available at https://github.com/hanzos3/directpv/releases/latest. Download the binary as per your operating system and architecture. Below is an example for `GNU/Linux` on `amd64` architecture:
 
 ```sh
 # Download DirectPV plugin.
-$ release=$(curl -sfL "https://api.github.com/repos/minio/directpv/releases/latest" | awk '/tag_name/ { print substr($2, 3, length($2)-4) }')
-$ curl -fLo kubectl-directpv https://github.com/minio/directpv/releases/download/v${release}/kubectl-directpv_${release}_linux_amd64
+$ release=$(curl -sfL "https://api.github.com/repos/hanzos3/directpv/releases/latest" | awk '/tag_name/ { print substr($2, 3, length($2)-4) }')
+$ curl -fLo kubectl-directpv https://github.com/hanzos3/directpv/releases/download/v${release}/kubectl-directpv_${release}_linux_amd64
 
 # Make the binary executable.
 $ chmod a+x kubectl-directpv
@@ -37,12 +37,12 @@ Before starting the installation, it is required to have DirectPV plugin install
 ### Prerequisites
 * Kubernetes >= v1.20 on GNU/Linux on amd64.
 * If you use private registry, below images must be pushed into your registry. You could use [this helper script](tools/push-images.sh) to do that.
-  - quay.io/minio/csi-node-driver-registrar:v2.12.0-0
-  - quay.io/minio/csi-provisioner:v5.0.2-0 _(for Kubernetes >= v1.20)_
-  - quay.io/minio/csi-provisioner:v2.2.0-go1.18 _(for kubernetes < v1.20)_
-  - quay.io/minio/livenessprobe:v2.14.0-0
-  - quay.io/minio/csi-resizer:v1.12.0-0
-  - quay.io/minio/directpv:latest
+  - ghcr.io/hanzos3/csi-node-driver-registrar:v2.12.0-0
+  - ghcr.io/hanzos3/csi-provisioner:v5.0.2-0 _(for Kubernetes >= v1.20)_
+  - ghcr.io/hanzos3/csi-provisioner:v2.2.0-go1.18 _(for kubernetes < v1.20)_
+  - ghcr.io/hanzos3/livenessprobe:v2.14.0-0
+  - ghcr.io/hanzos3/csi-resizer:v1.12.0-0
+  - ghcr.io/hanzos3/directpv:latest
 * If `seccomp` is enabled, load [DirectPV seccomp profile](../seccomp.json) on nodes where you want to install DirectPV and use `--seccomp-profile` flag to `kubectl directpv install` command. For more information, refer Kubernetes documentation [here](https://kubernetes.io/docs/tutorials/clusters/seccomp/)
 * If `apparmor` is enabled, load [DirectPV apparmor profile](../apparmor.profile) on nodes where you want to install DirectPV and use `--apparmor-profile` flag to `kubectl directpv install` command. For more information, refer to the [Kubernetes documentation](https://kubernetes.io/docs/tutorials/clusters/apparmor/).
 * Enabled `ExpandCSIVolumes` [feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/) for [volume expansion](https://kubernetes-csi.github.io/docs/volume-expansion.html) feature.
@@ -91,7 +91,7 @@ $ kubectl directpv install --openshift
 #### Installing by generating DirectPV manifests
 To install using generated manifests file, run below command
 ```sh
-$ curl -sfL https://github.com/minio/directpv/raw/master/docs/tools/install.sh | sh -s - apply
+$ curl -sfL https://github.com/hanzos3/directpv/raw/master/docs/tools/install.sh | sh -s - apply
 ```
 
 ## What's next

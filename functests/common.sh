@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-# This file is part of MinIO DirectPV
-# Copyright (c) 2021, 2022 MinIO, Inc.
+# This file is part of Hanzo S3 DirectPV
+# Copyright (c) 2021, 2022 Hanzo AI, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -150,7 +150,7 @@ resources:
   - ../resources/base
 
 images:
-  - name: quay.io/minio/directpv
+  - name: ghcr.io/hanzos3/directpv
     newTag: "${VERSION}"
 EOF
 
@@ -207,7 +207,7 @@ resources:
   - ../resources/base
 
 images:
-  - name: quay.io/minio/directpv
+  - name: ghcr.io/hanzos3/directpv
     newTag: ${VERSION}
 EOF
     # delete hangs sometimes even after the resources are deleted

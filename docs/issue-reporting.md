@@ -1,13 +1,13 @@
 # Issue reporting
 
 ## Reporting bugs
-Please open Github issue at https://github.com/minio/directpv/issues
+Please open Github issue at https://github.com/hanzos3/directpv/issues
 
 ## Reporting security issues
 
-The [latest release](https://github.com/minio/minio/releases/latest) of DirectPV comes with security and vulnerability fixes in previous releases. It is strongly recommended to use the latest version. Before reporting security/vulnerability issues, make sure those issues are not fixed in the latest release.
+The [latest release](https://github.com/hanzos3/directpv/releases/latest) of DirectPV comes with security and vulnerability fixes in previous releases. It is strongly recommended to use the latest version. Before reporting security/vulnerability issues, make sure those issues are not fixed in the latest release.
 
-All security issues should be reported by email to security@min.io. Your email will be acknowledged within 48 hours, and you'll receive a more detailed response to your email within 72 hours indicating the next steps in handling your report. DO NOT OPEN GITHUB ISSUES for security bugs.
+All security issues should be reported by email to security@hanzo.ai. Your email will be acknowledged within 48 hours, and you'll receive a more detailed response to your email within 72 hours indicating the next steps in handling your report. DO NOT OPEN GITHUB ISSUES for security bugs.
 
 Please, provide a detailed explanation of the issue. In particular, outline the type of the security
 issue (DoS, authentication bypass, information disclose, ...) and the assumptions you're making (e.g. do
@@ -15,13 +15,11 @@ you need access credentials for a successful exploit).
 
 If you have not received a reply to your email within 48 hours or you have not heard from the security team
 for the past five days please contact the security team directly:
-   - Primary security coordinators: sid@min.io
-   - Secondary coordinator: harsha@min.io
-   - If you receive no response: dev@min.io
+   - Security contact: security@hanzo.ai
 
 ### Disclosure Process
 
-MinIO uses the following disclosure process:
+Hanzo AI uses the following disclosure process:
 
 1. Once the security report is received one member of the security team tries to verify and reproduce
    the issue and determines the impact it has.
@@ -29,9 +27,9 @@ MinIO uses the following disclosure process:
    If the report is rejected the response explains why.
 3. Code is audited to find any potential similar problems.
 4. Fixes are prepared for the latest release.
-5. On the date that the fixes are applied a security advisory will be published on https://blog.min.io.
-   Please inform us in your report email whether MinIO should mention your contribution w.r.t. fixing
-   the security issue. By default MinIO will **not** publish this information to protect your privacy.
+5. On the date that the fixes are applied a security advisory will be published.
+   Please inform us in your report email whether Hanzo AI should mention your contribution w.r.t. fixing
+   the security issue. By default Hanzo AI will **not** publish this information to protect your privacy.
 
 This process can take some time, especially when coordination is required with maintainers of other projects.
 Every effort will be made to handle the bug in as timely a manner as possible, however it's important that we
@@ -40,7 +38,7 @@ follow the process described above to ensure that disclosures are handled consis
 ### Vulnerability Management Policy
 
 This document formally describes the process of addressing and managing a
-reported vulnerability that has been found in the MinIO server code base,
+reported vulnerability that has been found in the Hanzo S3 server code base,
 any directly connected ecosystem component or a direct / indirect dependency
 of the code base.
 
@@ -48,7 +46,7 @@ of the code base.
 
 The vulnerability management policy described in this document covers the
 process of investigating, assessing and resolving a vulnerability report
-opened by a MinIO employee or an external third party.
+opened by a Hanzo AI employee or an external third party.
 
 Therefore, it lists pre-conditions and actions that should be performed to
 resolve and fix a reported vulnerability.
@@ -64,14 +62,14 @@ contains the following information:
    a well-established vulnerability identifier, e.g. CVE number, can be
    used instead.
 
-Based on the description mentioned above, a MinIO engineer or security team
+Based on the description mentioned above, a Hanzo AI engineer or security team
 member investigates:
 
  - Whether the reported vulnerability exists.
  - The conditions that are required such that the vulnerability can be exploited.
  - The steps required to fix the vulnerability.
 
-In general, if the vulnerability exists in one of the MinIO code bases
-itself - not in a code dependency - then MinIO will, if possible, fix
+In general, if the vulnerability exists in one of the Hanzo S3 code bases
+itself - not in a code dependency - then Hanzo AI will, if possible, fix
 the vulnerability or implement reasonable countermeasures such that the
 vulnerability cannot be exploited anymore.

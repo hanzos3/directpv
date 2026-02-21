@@ -55,8 +55,8 @@ USAGE:
 FLAGS:
       --node-selector strings        Select the storage nodes using labels (KEY=VALUE,..)
       --tolerations strings          Set toleration labels on the storage nodes (KEY[=VALUE]:EFFECT,..)
-      --registry string              Name of container registry (default "quay.io")
-      --org string                   Organization name in the registry (default "minio")
+      --registry string              Name of container registry (default "ghcr.io")
+      --org string                   Organization name in the registry (default "hanzos3")
       --image string                 Name of the DirectPV image (default "directpv:v4.0.6")
       --image-pull-secrets strings   Image pull secrets for DirectPV images (SECRET1,..)
       --apparmor-profile string      Set path to Apparmor profile
