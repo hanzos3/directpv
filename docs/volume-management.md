@@ -43,7 +43,7 @@ metadata:
   finalizers:
   - kubernetes.io/pvc-protection
   labels:
-    app: minio
+    app: s3
   name: s3-data-1-s3-0
   namespace: default
   resourceVersion: "76360"
@@ -79,7 +79,7 @@ metadata:
   finalizers:
   - kubernetes.io/pvc-protection
   labels:
-    app: minio
+    app: s3
   name: s3-data-1-s3-0
   namespace: default
   resourceVersion: "76360"
@@ -118,7 +118,7 @@ metadata:
   finalizers:
   - kubernetes.io/pvc-protection
   labels:
-    app: minio
+    app: s3
   name: s3-data-1-s3-0
   namespace: default
   resourceVersion: "76651"

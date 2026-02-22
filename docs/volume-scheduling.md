@@ -113,10 +113,10 @@ apiVersion: v1
 metadata:
   name: minio
   labels:
-    app: minio
+    app: s3
 spec:
   selector:
-    app: minio
+    app: s3
   ports:
     - name: minio
       port: 9000
@@ -128,19 +128,19 @@ kind: StatefulSet
 metadata:
   name: minio
   labels:
-    app: minio
+    app: s3
 spec:
   serviceName: "minio"
   replicas: 2
   selector:
     matchLabels:
-      app: minio
+      app: s3
   template:
     metadata:
       labels:
-        app: minio
+        app: s3
         directpv.min.io/organization: minio
-        directpv.min.io/app: minio-example
+        directpv.min.io/app: s3-example
         directpv.min.io/tenant: tenant-1
     spec:
       containers:
