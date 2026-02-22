@@ -26,10 +26,10 @@ Refer to the [list volumes command](./command-reference.md#volumes-command) for 
 ## Expand volume
 DirectPV supports online volume expansion which does not require restart of pods using those volumes. This is automatically done after setting expanded size to `Persistent Volume Claim`. Below is an example:
 ```sh
-# Get 'minio-data-1-minio-0' Persistent volume claim.
-$ kubectl get pvc minio-data-1-minio-0 -o yaml > minio-data-1-minio-0.yaml
+# Get 's3-data-1-s3-0' Persistent volume claim.
+$ kubectl get pvc s3-data-1-s3-0 -o yaml > s3-data-1-s3-0.yaml
 
-$ cat minio-data-1-minio-0.yaml
+$ cat s3-data-1-s3-0.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -44,7 +44,7 @@ metadata:
   - kubernetes.io/pvc-protection
   labels:
     app: minio
-  name: minio-data-1-minio-0
+  name: s3-data-1-s3-0
   namespace: default
   resourceVersion: "76360"
   uid: d7fad69a-d267-43c0-9baf-19fd5f65bdb5
@@ -64,8 +64,8 @@ status:
     storage: 16Mi
   phase: Bound
 
-# Edit 'minio-data-1-minio-0' PVC to increase the size from 16MiB to 64MiB.
-$ cat minio-data-1-minio-0.yaml
+# Edit 's3-data-1-s3-0' PVC to increase the size from 16MiB to 64MiB.
+$ cat s3-data-1-s3-0.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -80,7 +80,7 @@ metadata:
   - kubernetes.io/pvc-protection
   labels:
     app: minio
-  name: minio-data-1-minio-0
+  name: s3-data-1-s3-0
   namespace: default
   resourceVersion: "76360"
   uid: d7fad69a-d267-43c0-9baf-19fd5f65bdb5
@@ -101,10 +101,10 @@ status:
   phase: Bound
 
 # Apply changes
-$ kubectl apply -f minio-data-1-minio-0.yaml
+$ kubectl apply -f s3-data-1-s3-0.yaml
 
 # After successful expansion, you will see updated YAML
-$ kubectl get pvc minio-data-1-minio-0 -o yaml
+$ kubectl get pvc s3-data-1-s3-0 -o yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -119,7 +119,7 @@ metadata:
   - kubernetes.io/pvc-protection
   labels:
     app: minio
-  name: minio-data-1-minio-0
+  name: s3-data-1-s3-0
   namespace: default
   resourceVersion: "76651"
   uid: d7fad69a-d267-43c0-9baf-19fd5f65bdb5

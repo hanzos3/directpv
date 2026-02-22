@@ -254,7 +254,7 @@ ALIASES:
 
 FLAGS:
       --drive-id strings         Filter output by drive IDs
-      --pod-names strings        Filter output by pod names; supports ellipses pattern e.g. minio-{0...4}
+      --pod-names strings        Filter output by pod names; supports ellipses pattern e.g. s3-{0...4}
       --pod-namespaces strings   Filter output by pod namespaces; supports ellipses pattern e.g. tenant-{0...3}
       --pvc                      Add PVC names in the output
       --status strings           Filter output by volume status; one of: pending|ready
@@ -282,7 +282,7 @@ EXAMPLES:
    $ kubectl directpv list volumes --nodes=node1,node2 --drives=nvme0n1
 
 4. List volumes by pod name
-   $ kubectl directpv list volumes --pod-names=minio-{1...3}
+   $ kubectl directpv list volumes --pod-names=s3-{1...3}
 
 5. List volumes by pod namespace
    $ kubectl directpv list volumes --pod-namespaces=tenant-{1...3}
@@ -375,7 +375,7 @@ ALIASES:
 
 FLAGS:
       --drive-id strings         Filter output by drive IDs
-      --pod-names strings        Filter output by pod names; supports ellipses pattern e.g. minio-{0...4}
+      --pod-names strings        Filter output by pod names; supports ellipses pattern e.g. s3-{0...4}
       --pod-namespaces strings   Filter output by pod namespaces; supports ellipses pattern e.g. tenant-{0...3}
       --status strings           Filter output by volume status; one of: pending|ready
       --labels strings           If present, select by volume labels; supports comma separated kv pairs. e.g. tier=hot,region=east
@@ -528,7 +528,7 @@ FLAGS:
       --all                      If present, select all volumes
       --dry-run                  Run in dry run mode
       --drive-id strings         Select volumes by drive IDs
-      --pod-names strings        Select volumes by pod names; supports ellipses pattern e.g. minio-{0...4}
+      --pod-names strings        Select volumes by pod names; supports ellipses pattern e.g. s3-{0...4}
       --pod-namespaces strings   Select volumes by pod namespaces; supports ellipses pattern e.g. tenant-{0...3}
   -h, --help                     help for clean
 
@@ -553,7 +553,7 @@ EXAMPLES:
    $ kubectl directpv clean --nodes=node1
 
 6. Clean volumes by pod name
-   $ kubectl directpv clean --pod-names=minio-{1...3}
+   $ kubectl directpv clean --pod-names=s3-{1...3}
 
 7. Clean volumes by pod namespace
    $ kubectl directpv clean --pod-namespaces=tenant-{1...3}
@@ -620,7 +620,7 @@ USAGE:
 FLAGS:
   -n, --nodes strings            If present, suspend volumes from given nodes; supports ellipses pattern e.g. node{1...10}
   -d, --drives strings           If present, suspend volumes by given drive names; supports ellipses pattern e.g. sd{a...z}
-      --pod-names strings        If present, suspend volumes by given pod names; supports ellipses pattern e.g. minio-{0...4}
+      --pod-names strings        If present, suspend volumes by given pod names; supports ellipses pattern e.g. s3-{0...4}
       --pod-namespaces strings   If present, suspend volumes by given pod namespaces; supports ellipses pattern e.g. tenant-{0...3}
       --dangerous                Suspending the volumes will make them as read-only
   -h, --help                     help for volumes
@@ -702,7 +702,7 @@ USAGE:
 FLAGS:
   -n, --nodes strings            If present, resume volumes from given nodes; supports ellipses pattern e.g. node{1...10}
   -d, --drives strings           If present, resume volumes by given drive names; supports ellipses pattern e.g. sd{a...z}
-      --pod-names strings        If present, resume volumes by given pod names; supports ellipses pattern e.g. minio-{0...4}
+      --pod-names strings        If present, resume volumes by given pod names; supports ellipses pattern e.g. s3-{0...4}
       --pod-namespaces strings   If present, resume volumes by given pod namespaces; supports ellipses pattern e.g. tenant-{0...3}
   -h, --help                     help for volumes
 
