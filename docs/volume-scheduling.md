@@ -111,14 +111,14 @@ This custom storage class has to be used in your StatefulSet deployment. Below i
 kind: Service
 apiVersion: v1
 metadata:
-  name: minio
+  name: hanzo-s3
   labels:
-    app: s3
+    app: hanzo-s3
 spec:
   selector:
-    app: s3
+    app: hanzo-s3
   ports:
-    - name: minio
+    - name: s3
       port: 9000
 
 ---
@@ -126,42 +126,42 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: minio
+  name: hanzo-s3
   labels:
-    app: s3
+    app: hanzo-s3
 spec:
-  serviceName: "minio"
+  serviceName: "hanzo-s3"
   replicas: 2
   selector:
     matchLabels:
-      app: s3
+      app: hanzo-s3
   template:
     metadata:
       labels:
-        app: s3
-        directpv.min.io/organization: minio
-        directpv.min.io/app: s3-example
+        app: hanzo-s3
+        directpv.min.io/organization: hanzo
+        directpv.min.io/app: hanzo-s3-example
         directpv.min.io/tenant: tenant-1
     spec:
       containers:
-      - name: minio
-        image: minio/minio
+      - name: hanzo-s3
+        image: ghcr.io/hanzoai/s3
         env:
         - name: MINIO_ACCESS_KEY
-          value: minio
+          value: hanzo
         - name: MINIO_SECRET_KEY
-          value: minio123
+          value: hanzo-secret
         volumeMounts:
-        - name: minio-data-1
+        - name: s3-data-1
           mountPath: /data1
-        - name: minio-data-2
+        - name: s3-data-2
           mountPath: /data2
         args:
         - "server"
-        - "http://minio-{0...1}.minio.default.svc.cluster.local:9000/data{1...2}"
+        - "http://hanzo-s3-{0...1}.hanzo-s3.default.svc.cluster.local:9000/data{1...2}"
   volumeClaimTemplates:
   - metadata:
-      name: minio-data-1
+      name: s3-data-1
     spec:
       storageClassName: tenant-1-storage
       accessModes: [ "ReadWriteOnce" ]
@@ -169,7 +169,7 @@ spec:
         requests:
           storage: 16Mi
   - metadata:
-      name: minio-data-2
+      name: s3-data-2
     spec:
       storageClassName: tenant-1-storage
       accessModes: [ "ReadWriteOnce" ]

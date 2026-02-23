@@ -54,20 +54,20 @@ PV claim must be defined with specific parameters in `volumeClaimTemplates` spec
 | `storageClassName` | `directpv-min-io` or any storage class name having `directpv-min-io` provisioner |
 | `accessModes`      | `[ "ReadWriteOnce" ]`                                                            |
 
-Below is an example claiming two `16MiB` storage from `directpv-min-io` storage class for `minio-data-1` and `minio-data-2` PVC to two `minio` pods:
+Below is an example claiming two `16MiB` storage from `directpv-min-io` storage class for `s3-data-1` and `s3-data-2` PVC to two `hanzo-s3` pods:
 
 ```yaml
 kind: Service
 apiVersion: v1
 metadata:
-  name: minio
+  name: hanzo-s3
   labels:
-    app: minio
+    app: hanzo-s3
 spec:
   selector:
-    app: minio
+    app: hanzo-s3
   ports:
-    - name: minio
+    - name: s3
       port: 9000
 
 ---
@@ -75,42 +75,42 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: minio
+  name: hanzo-s3
   labels:
-    app: minio
+    app: hanzo-s3
 spec:
-  serviceName: "minio"
+  serviceName: "hanzo-s3"
   replicas: 2
   selector:
     matchLabels:
-      app: minio
+      app: hanzo-s3
   template:
     metadata:
       labels:
-        app: minio
-        directpv.min.io/organization: minio
-        directpv.min.io/app: minio-example
+        app: hanzo-s3
+        directpv.min.io/organization: hanzo
+        directpv.min.io/app: hanzo-s3-example
         directpv.min.io/tenant: tenant-1
     spec:
       containers:
-      - name: minio
-        image: minio/minio
+      - name: hanzo-s3
+        image: ghcr.io/hanzoai/s3
         env:
         - name: MINIO_ACCESS_KEY
-          value: minio
+          value: hanzo
         - name: MINIO_SECRET_KEY
-          value: minio123
+          value: hanzo-secret
         volumeMounts:
-        - name: minio-data-1
+        - name: s3-data-1
           mountPath: /data1
-        - name: minio-data-2
+        - name: s3-data-2
           mountPath: /data2
         args:
         - "server"
-        - "http://minio-{0...1}.minio.default.svc.cluster.local:9000/data{1...2}"
+        - "http://hanzo-s3-{0...1}.hanzo-s3.default.svc.cluster.local:9000/data{1...2}"
   volumeClaimTemplates:
   - metadata:
-      name: minio-data-1
+      name: s3-data-1
     spec:
       storageClassName: directpv-min-io
       accessModes: [ "ReadWriteOnce" ]
@@ -118,7 +118,7 @@ spec:
         requests:
           storage: 16Mi
   - metadata:
-      name: minio-data-2
+      name: s3-data-2
     spec:
       storageClassName: directpv-min-io
       accessModes: [ "ReadWriteOnce" ]
