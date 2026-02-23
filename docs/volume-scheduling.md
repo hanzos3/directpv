@@ -147,9 +147,9 @@ spec:
       - name: hanzo-s3
         image: ghcr.io/hanzoai/s3
         env:
-        - name: MINIO_ACCESS_KEY
+        - name: S3_ACCESS_KEY
           value: hanzo
-        - name: MINIO_SECRET_KEY
+        - name: S3_SECRET_KEY
           value: hanzo-secret
         volumeMounts:
         - name: s3-data-1
